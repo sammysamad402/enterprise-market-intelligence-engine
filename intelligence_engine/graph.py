@@ -296,7 +296,7 @@ def _fields_mentioned_in_feedback(feedback: str) -> set[str]:
 
 _FIELD_RE = re.compile(r"(?:Field|field)\s*[:\-]\s*([a-z_]+)", re.IGNORECASE)
 _REJECTED_RE = re.compile(
-    r"(?:Incorrect value|Rejected value|rejected|was)\s*[:\-]\s*['\"]?(.+?)['\"]?\s*$",
+    r"(?:Incorrect value|Incorrect claim|Rejected value|rejected|was)\s*[:\-]\s*['\"]?(.+?)['\"]?\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
 _CORRECT_RE = re.compile(
@@ -307,6 +307,27 @@ _CONTEXT_RE = re.compile(
     r"(?:Context says|Evidence|Ground.truth|context)\s*[:\-]\s*['\"]?(.+?)['\"]?\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
+
+# Sentinel phrases the critic may emit when context does not support a claim.
+# Matched case-insensitively; the full set covers natural paraphrases.
+_REMOVAL_SENTINELS: frozenset[str] = frozenset([
+    "remove unsupported claim",
+    "remove this claim",
+    "remove claim",
+    "delete unsupported claim",
+    "omit unsupported claim",
+    "unsupported — remove",
+    "not supported — remove",
+])
+
+# Fields whose JSON type is List[str].  A removal instruction on these fields
+# means "delete the criticised item from the list", NOT "replace the list with
+# a string".  Fields absent from this set are scalar strings.
+_LIST_TYPE_FIELDS: frozenset[str] = frozenset([
+    "core_revenue_drivers",
+    "risk_factors",
+    "sources",
+])
 
 
 def parse_critic_corrections(feedback: str) -> list[CriticCorrection]:
@@ -385,11 +406,21 @@ def parse_critic_corrections(feedback: str) -> list[CriticCorrection]:
         correct_match = _CORRECT_RE.search(block)
         context_match = _CONTEXT_RE.search(block)
 
+        raw_correct = correct_match.group(1).strip() if correct_match else ""
+
+        # Detect removal instructions.  When the critic writes
+        # "Correct value: Remove unsupported claim" (or any recognised variant)
+        # it is an instruction to delete the item, NOT a literal replacement
+        # value.  We tag this so type-aware downstream code handles it correctly
+        # for List[str] fields (item deletion) vs scalar fields (placeholder).
+        is_removal = raw_correct.lower() in _REMOVAL_SENTINELS
+
         correction = CriticCorrection(
             field_name=matched_field,
             rejected_value=rejected_match.group(1).strip() if rejected_match else "",
-            correct_value=correct_match.group(1).strip() if correct_match else "",
+            correct_value="" if is_removal else raw_correct,
             evidence=context_match.group(1).strip() if context_match else "",
+            is_removal=is_removal,
         )
         corrections.append(correction)
         # INFO-level so every extracted correction is visible in the default log.
@@ -519,9 +550,20 @@ def _render_structured_corrections(
     Render a list of ``CriticCorrection`` objects into a numbered checklist
     string for injection into ``_GENERATOR_SYSTEM_PROMPT_REVISION``.
 
-    When ``correct_value`` is present the model is told to use it verbatim
-    (the highest-signal directive).  Returns a fallback note when the list
-    is empty so the prompt section is never blank.
+    Type-aware rendering
+    --------------------
+    For **list-type fields** (``core_revenue_drivers``, ``risk_factors``,
+    ``sources``) where the critic issued a removal instruction:
+      → The model is told to *remove the specific item* from the list and
+        keep all other items intact.  It is explicitly forbidden from
+        replacing the entire list with a string.
+
+    For **scalar fields** where the critic issued a removal instruction:
+      → The model is told to replace the value with
+        ``"Insufficient data in provided context"``.
+
+    For normal value-replacement corrections (no removal):
+      → Existing MANDATORY VALUE behaviour is preserved unchanged.
     """
     if not corrections:
         return "No structured corrections available — refer to the critic notes below."
@@ -531,7 +573,30 @@ def _render_structured_corrections(
         parts = [f"{i}. FIELD: {c.field_name}"]
         if c.rejected_value:
             parts.append(f"   REJECTED VALUE  : {c.rejected_value}")
-        if c.correct_value:
+
+        if c.is_removal:
+            if c.field_name in _LIST_TYPE_FIELDS:
+                # List field — delete only the offending item.
+                item_hint = (
+                    f" (the item matching: {c.rejected_value!r})"
+                    if c.rejected_value
+                    else ""
+                )
+                parts.append(
+                    f"   INSTRUCTION     : REMOVE the specific list item{item_hint} "
+                    f"from {c.field_name}. "
+                    f"Keep ALL other list items exactly as-is. "
+                    f"The field MUST remain a JSON array — do NOT replace the "
+                    f"entire array with a string value."
+                )
+            else:
+                # Scalar field — replace with a safe placeholder.
+                parts.append(
+                    f"   INSTRUCTION     : REMOVE the unsupported value from "
+                    f"{c.field_name}. Replace it with "
+                    f'"Insufficient data in provided context".'
+                )
+        elif c.correct_value:
             parts.append(
                 f"   MANDATORY VALUE : {c.correct_value}  \u2190 USE THIS EXACTLY"
             )
@@ -539,6 +604,7 @@ def _render_structured_corrections(
             parts.append(
                 "   MANDATORY VALUE : (derive from context — must be concrete and specific)"
             )
+
         if c.evidence:
             parts.append(f"   EVIDENCE        : {c.evidence}")
         lines.append("\n".join(parts))
@@ -565,6 +631,151 @@ def _detect_vagueness(report: MarketIntelligenceReport) -> str | None:
                 "or 'insufficient data' — find the actual figure in the context."
             )
     return None
+
+
+def _apply_removal_corrections(
+    raw_dict: dict,
+    parsed_corrections: list[CriticCorrection],
+    previous_draft: dict | None,
+) -> dict:
+    """
+    Sanitise a raw JSON dict produced by the LLM before Pydantic validation.
+
+    This is the last line of defence against the "Remove unsupported claim"
+    schema corruption bug.  Even with improved prompt language, an LLM may
+    still literally set a List[str] field to the string
+    ``"Remove unsupported claim"``.  This function detects and repairs that.
+
+    Repair strategy per field type
+    --------------------------------
+    **List[str] fields** (``core_revenue_drivers``, ``risk_factors``, ``sources``):
+
+    Case A — LLM produced a string instead of a list (the core bug):
+        The field value is a string (e.g. ``"Remove unsupported claim"``).
+        We fall back to the *previous draft's* list for that field and apply
+        the item deletion there instead, because the LLM's output is
+        structurally invalid and cannot be trusted.
+
+    Case B — LLM produced a list but left a removal-sentinel string as an
+        element (e.g. ``["valid item", "Remove unsupported claim"]``):
+        Remove any list items that match a removal sentinel and any items
+        that exactly match a ``rejected_value`` from a removal correction.
+
+    **Scalar fields** (``company_name``, ``market_cap_or_valuation``):
+        If the value matches a removal sentinel, replace it with the safe
+        placeholder ``"Insufficient data in provided context"``.
+
+    Parameters
+    ----------
+    raw_dict:
+        The parsed JSON dict returned by the LLM (may be malformed).
+    parsed_corrections:
+        Structured corrections from the last critic pass.
+    previous_draft:
+        The last accepted (or best-effort) draft dict.  Used as a fallback
+        for list fields when the LLM has replaced the list with a string.
+
+    Returns
+    -------
+    dict
+        A sanitised copy of ``raw_dict`` safe to pass to Pydantic.
+    """
+    if not parsed_corrections:
+        return raw_dict
+
+    result = dict(raw_dict)  # shallow copy — we only mutate top-level fields
+
+    # Build lookup: field_name → list of removal corrections for that field.
+    removals: dict[str, list[CriticCorrection]] = {}
+    for c in parsed_corrections:
+        if c.is_removal:
+            removals.setdefault(c.field_name, []).append(c)
+
+    if not removals:
+        return result  # no removal corrections — nothing to do
+
+    for field_name, corrections in removals.items():
+        current_value = result.get(field_name)
+
+        if field_name in _LIST_TYPE_FIELDS:
+            # ── Case A: LLM replaced the list with a string ──────────────
+            if not isinstance(current_value, list):
+                logger.warning(
+                    "[_apply_removal_corrections] Field %r is %s instead of a list "
+                    "— LLM appears to have applied the removal sentinel literally.  "
+                    "Falling back to previous draft and removing the flagged items.",
+                    field_name,
+                    type(current_value).__name__,
+                )
+                # Use the previous draft's list as the base for deletion.
+                base_list: list[str] = []
+                if previous_draft and isinstance(previous_draft.get(field_name), list):
+                    base_list = list(previous_draft[field_name])
+                else:
+                    logger.warning(
+                        "[_apply_removal_corrections] No previous draft available "
+                        "for field %r — field will be set to empty list.",
+                        field_name,
+                    )
+                current_value = base_list
+
+            # ── Case B (and Case A after fallback): filter out removed items ──
+            rejected_items: set[str] = {
+                c.rejected_value.strip().strip('"\'')
+                for c in corrections
+                if c.rejected_value
+            }
+
+            def _should_remove(item: Any) -> bool:
+                """True if item is a removal sentinel or matches a rejected value."""
+                if not isinstance(item, str):
+                    return False
+                item_lower = item.strip().lower()
+                if item_lower in _REMOVAL_SENTINELS:
+                    return True
+                # Fuzzy match: item contains or is contained by a rejected value.
+                for rv in rejected_items:
+                    if rv and (rv.lower() in item_lower or item_lower in rv.lower()):
+                        return True
+                return False
+
+            filtered = [item for item in current_value if not _should_remove(item)]
+
+            removed_count = len(current_value) - len(filtered)
+            if removed_count:
+                logger.info(
+                    "[_apply_removal_corrections] Removed %d item(s) from list "
+                    "field %r.  Remaining items: %d.",
+                    removed_count,
+                    field_name,
+                    len(filtered),
+                )
+            else:
+                logger.debug(
+                    "[_apply_removal_corrections] No items matched removal criteria "
+                    "for field %r.",
+                    field_name,
+                )
+
+            # Ensure at least one item remains so Pydantic's min_length=1 passes.
+            # If we emptied the list the critic will catch it next loop and the
+            # generator will be asked to populate it from context.
+            result[field_name] = filtered if filtered else ["Insufficient data in provided context"]
+
+        else:
+            # ── Scalar field ──────────────────────────────────────────────
+            if isinstance(current_value, str) and (
+                current_value.strip().lower() in _REMOVAL_SENTINELS
+                or not current_value.strip()
+            ):
+                logger.info(
+                    "[_apply_removal_corrections] Scalar field %r contained a "
+                    "removal sentinel — replacing with safe placeholder.",
+                    field_name,
+                )
+                result[field_name] = "Insufficient data in provided context"
+
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -731,9 +942,34 @@ async def generate_report_node(state: AgentState) -> Dict[str, Any]:
             cleaned = "\n".join(inner_lines).strip()
 
         # ------------------------------------------------------------------
-        # Pydantic validation (unchanged).
+        # Parse to raw dict first so we can sanitise removal instructions
+        # before Pydantic validation.  This is the layer that catches the
+        # "risk_factors": "Remove unsupported claim" class of bugs.
         # ------------------------------------------------------------------
-        report = MarketIntelligenceReport.model_validate_json(cleaned)
+        try:
+            raw_dict: dict = json.loads(cleaned)
+        except json.JSONDecodeError as json_exc:
+            raise ValueError(
+                f"LLM output is not valid JSON: {json_exc}\n\nRaw output:\n{cleaned[:500]}"
+            ) from json_exc
+
+        previous_draft_dict: dict | None = None
+        if previous_rejected_draft:
+            try:
+                previous_draft_dict = json.loads(previous_rejected_draft)
+            except (json.JSONDecodeError, TypeError):
+                pass
+
+        sanitised_dict = _apply_removal_corrections(
+            raw_dict=raw_dict,
+            parsed_corrections=parsed_corrections,
+            previous_draft=previous_draft_dict,
+        )
+
+        # ------------------------------------------------------------------
+        # Pydantic validation on the sanitised dict.
+        # ------------------------------------------------------------------
+        report = MarketIntelligenceReport.model_validate(sanitised_dict)
 
         logger.info(
             "[generate_report_node] Schema validation PASSED — company=%r",

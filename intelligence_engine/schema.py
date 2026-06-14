@@ -99,7 +99,7 @@ class MarketIntelligenceReport(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Structured critic correction — NEW
+# Structured critic correction
 # ---------------------------------------------------------------------------
 
 
@@ -128,18 +128,38 @@ class CriticCorrection(BaseModel):
         The value the critic says should replace the rejected one.
         This is the most critical piece: it is injected directly into the
         revision prompt as a pre-filled answer the generator MUST use.
-        Empty string when the critic only identified what was wrong but not
-        what the right value is (rare; handled gracefully).
+        Empty string when ``is_removal`` is ``True`` (deletion instruction)
+        or when the critic only identified what was wrong but not what the
+        right value is (rare; handled gracefully).
     evidence
         The context snippet or reasoning the critic cited as ground truth.
         Injected alongside ``correct_value`` so the generator can confirm
         the figure is traceable.
+    is_removal
+        ``True`` when the critic's "Correct value:" line contains a removal
+        sentinel such as "Remove unsupported claim" rather than a concrete
+        replacement value.
+
+        Semantics differ by field type:
+
+        * **List[str] fields** (``core_revenue_drivers``, ``risk_factors``,
+          ``sources``): delete the specific item whose text matches
+          ``rejected_value`` from the list, preserving all other items.
+          Never replace the whole list with a string.
+
+        * **Scalar fields** (``company_name``, ``market_cap_or_valuation``):
+          replace the current value with the safe placeholder
+          ``"Insufficient data in provided context"``.
+
+        Defaults to ``False`` so all existing ``CriticCorrection`` objects
+        constructed without this argument continue to work without changes.
     """
 
     field_name: str
     rejected_value: str = ""
     correct_value: str = ""
     evidence: str = ""
+    is_removal: bool = False  # ← NEW: signals a deletion, not a value replacement
 
 
 # ---------------------------------------------------------------------------
@@ -170,8 +190,10 @@ class AgentState(TypedDict, total=False):
         ``'PASSED'`` (all facts grounded) or a detailed correction message.
     parsed_corrections
         Structured ``CriticCorrection`` objects extracted from
-        ``critic_feedback`` by ``parse_critic_corrections``.  Used by
-        ``generate_report_node`` to build per-field revision mandates.
+        ``critic_feedback`` by ``parse_critic_corrections``.  Stored as
+        ``list[dict]`` (via ``CriticCorrection.model_dump()``) because
+        LangGraph state must be JSON-serialisable.  Reconstructed into typed
+        objects with ``CriticCorrection(**c)`` inside ``generate_report_node``.
         ``None`` on the first pass or when the critic passed.
     loop_counter
         Number of complete critic→generator correction cycles executed so far.
@@ -197,11 +219,11 @@ class AgentState(TypedDict, total=False):
     retrieved_context: List[str]
     generated_report_draft: Optional[Dict[str, Any]]
     critic_feedback: Optional[str]
-    parsed_corrections: Optional[List[Dict[str, str]]]   # ← NEW
+    parsed_corrections: Optional[List[Dict[str, Any]]]  # ← Any (not str): is_removal is bool
     loop_counter: int
     error_trace: Optional[str]
     previous_rejected_draft: Optional[str]
-    vagueness_error: Optional[str]                        # ← NEW
+    vagueness_error: Optional[str]
 
 
 # ---------------------------------------------------------------------------
@@ -221,9 +243,9 @@ def initial_state(query: str) -> AgentState:
         retrieved_context=[],
         generated_report_draft=None,
         critic_feedback=None,
-        parsed_corrections=None,    # ← NEW
+        parsed_corrections=None,
         loop_counter=0,
         error_trace=None,
         previous_rejected_draft=None,
-        vagueness_error=None,       # ← NEW
+        vagueness_error=None,
     )
