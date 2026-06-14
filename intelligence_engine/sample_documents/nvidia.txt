@@ -1,0 +1,15 @@
+Company: NVIDIA Corporation
+Ticker: NVDA
+Sector: Semiconductors / AI Infrastructure
+
+NVIDIA has emerged as the dominant infrastructure provider for the generative AI era. Its H100 and H200 GPU clusters have become the de facto compute standard for large language model training across hyperscalers, cloud providers, and enterprise AI labs. The company reported fiscal year 2025 revenue of approximately $130 billion, with data center segment revenue exceeding $115 billion — a tripling year-over-year driven almost entirely by AI workload demand.
+
+NVIDIA's CUDA software ecosystem creates a deep moat: the majority of AI frameworks, libraries, and research papers assume CUDA compatibility, making switching costs for compute buyers extremely high. Competitors AMD (ROCm) and Intel (oneAPI) have struggled to replicate this software lock-in despite competitive hardware specs.
+
+The Blackwell GPU architecture (B100, B200, GB200) began shipping in late 2024 and ramps through 2025. Blackwell delivers approximately 2.5x the training throughput of H100 per GPU and introduces a new NVLink Switch System allowing 576-GPU "superchip" configurations with 1.8 TB/s interconnect bandwidth.
+
+Key risks: customer concentration (Microsoft, Google, Amazon, and Meta together represent roughly 40% of data center revenue), export controls limiting China sales (estimated $10–15B annual revenue impact), and potential demand softening if LLM scaling laws plateau. Taiwan TSMC fab concentration also introduces geopolitical supply chain risk.
+
+NVIDIA's automotive segment (DRIVE platform) is growing at 50%+ annually as autonomous vehicle OEMs adopt its end-to-end stack. The company expects automotive to be a multi-billion dollar business by 2026.
+
+Competitive positioning: NVIDIA holds approximately 80–85% market share in AI training GPUs. The company's Project Digits (personal AI supercomputer, $3,000 price point) signals an intent to expand addressable market into edge inference and enterprise workstations.

@@ -1,0 +1,17 @@
+Company: Advanced Micro Devices, Inc. (AMD)
+Ticker: AMD
+Sector: Semiconductors / AI Accelerators / CPUs
+
+AMD is NVIDIA's closest competitor in AI accelerator hardware, though it operates from a position of significant market share deficit. The Instinct MI300X GPU achieved competitive performance with NVIDIA H100 on inference workloads (particularly for large language model serving) and has driven AMD's data center GPU revenue from near-zero in 2022 to an estimated $5–6 billion in 2024.
+
+AMD's 2025 roadmap is anchored on the Instinct MI350 and MI400 series. MI350 (CDNA 4 architecture, TSMC 3nm) is expected to deliver 35% better inference performance per watt than MI300X and ships in H2 2025. The MI400 generation (targeted 2026) will introduce a new memory architecture competitive with NVIDIA's HBM4 roadmap.
+
+The software gap remains AMD's biggest challenge. ROCm (AMD's CUDA alternative) has improved substantially — major frameworks (PyTorch, JAX) now support ROCm officially, and AMD has invested heavily in ROCm ecosystem engineering — but CUDA's 15-year head start in library depth, tooling, and developer familiarity is difficult to overcome quickly. Enterprise AI teams typically require 3–6 months of engineering effort to migrate CUDA workloads to ROCm, creating adoption friction.
+
+AMD's CPU business (EPYC server processors) is a strategic advantage: EPYC holds approximately 33% x86 server CPU market share and is the compute substrate in AMD's own Instinct systems. AI inference clusters often pair AMD CPUs with AMD GPUs in AMD-homogeneous rack configurations, simplifying supply chain and driver management.
+
+Microsoft, Meta, and several hyperscalers have disclosed AMD Instinct deployments primarily for inference serving (cost per token is lower than H100 for some LLM architectures). AMD is less represented in training clusters where NVIDIA's NVLink interconnect advantage is most significant.
+
+Key metrics: Data center segment revenue growing 100%+ year-over-year. Overall company revenue approximately $26 billion in 2024. Gross margins improving toward 55%+ as AI GPU mix increases. Lisa Su's leadership continuity is considered a key intangible asset.
+
+Key risks: NVIDIA's Blackwell generation widens the performance gap again; ROCm software quality issues causing enterprise churn; and geopolitical export controls affecting China revenue (AMD's MI300 series also subject to US export licensing requirements).

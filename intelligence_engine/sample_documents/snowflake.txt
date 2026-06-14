@@ -1,0 +1,17 @@
+Company: Snowflake Inc.
+Ticker: SNOW
+Sector: Cloud Data Platform / AI Data Cloud
+
+Snowflake is the dominant cloud-native data warehousing platform with approximately 10,000 enterprise customers and $3.5 billion in fiscal year 2025 product revenue (growing 29% year-over-year). The company's consumption-based pricing model — customers pay for compute credits used rather than seats — creates a naturally scaling revenue model tied to data usage growth.
+
+Snowflake Cortex AI, launched in 2024, is the company's response to the AI era: it allows customers to run LLM inference (using models including Mistral, Llama, and Snowflake Arctic) directly on their data within the Snowflake security perimeter without data movement. For regulated industries (banking, healthcare, insurance) where data cannot leave controlled environments, this is a significant architectural advantage.
+
+Snowflake Arctic, the company's open-source foundation model (released April 2024), targets enterprise intelligence tasks and demonstrates Snowflake's intent to be a model provider as well as a data platform. Arctic uses a mixture-of-experts architecture optimized for SQL and structured data tasks — aligning with Snowflake's core customer use cases.
+
+The Databricks competition intensifies as both companies expand into each other's territory: Databricks pushes into SQL analytics (Delta Lake, Databricks SQL), while Snowflake pushes into ML/data science (Snowpark ML, Streamlit applications). Customer consolidation onto one platform is increasingly common, and both companies compete aggressively for expansion within shared accounts.
+
+CEO transition: Sridhar Ramaswamy (former Google SVP of Ads, founder of Neeva) took over as CEO in February 2024, succeeding Frank Slootman. Ramaswamy's background in search and AI signals a strategic intent to lean into AI-native data products.
+
+Key risks: consumption revenue is tied to macro IT spending — economic slowdowns reduce credit consumption. Competition from cloud-native warehouses (BigQuery, Redshift, Azure Synapse) with integrated AI features at lower price points. Gross margins (approximately 68% product gross margin) are under pressure as compute costs increase.
+
+Net revenue retention rate has declined from 165%+ in 2022 to approximately 127% in 2025, reflecting market maturation and increased competition, though still indicating healthy expansion within the existing customer base.

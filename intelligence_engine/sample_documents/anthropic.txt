@@ -1,0 +1,20 @@
+Company: Anthropic (Private)
+Structure: Public Benefit Corporation
+Valuation: ~$61 billion (2025)
+Total Funding: ~$10+ billion
+
+Anthropic is an AI safety company and frontier model laboratory founded in 2021 by former OpenAI researchers including CEO Dario Amodei and President Daniela Amodei. The Claude model family (Claude 3, Claude 3.5, Claude 4) has established strong performance across reasoning, coding, and long-context tasks, with Claude 3.5 Sonnet widely cited as competitive with GPT-4o on coding benchmarks.
+
+Revenue is estimated at $1.5–2 billion ARR in 2025, growing rapidly from Claude API sales, the Claude.ai consumer product, and enterprise agreements. Major investors include Amazon ($4B committed), Google ($2B), and Spark Capital.
+
+Anthropic's core differentiator is Constitutional AI (CAI) and its broader safety research program. The company publishes extensively on alignment, interpretability, and responsible scaling — which has built trust with regulated-industry enterprise buyers (finance, healthcare, legal) who require auditability and predictable model behavior.
+
+The Amazon partnership provides: (1) AWS as primary cloud infrastructure for training and inference, (2) Claude as the flagship model on AWS Bedrock, (3) Trainium chip access for training cost reduction, and (4) co-marketing to Amazon's enterprise customer base. This partnership largely mirrors Microsoft's relationship with OpenAI and provides Anthropic distribution leverage without building its own cloud.
+
+Claude's context window (200K tokens standard, 1M in extended versions) is among the longest available commercially, enabling use cases like full codebase analysis, document review, and multi-document synthesis that shorter-context models cannot handle.
+
+Anthropic's Model Specification (published 2024) outlines in detail how Claude is trained to be helpful, harmless, and honest — a transparency-first approach that differentiates it from competitors who treat alignment methodology as proprietary.
+
+Key risks: capital intensity of frontier model training (next training run estimated at $1B+), competition from OpenAI/Google/Meta on model capability, and dependence on Amazon infrastructure. The company has publicly committed to not pursuing AGI development faster than safety research can keep pace — a mission constraint that may limit competitive velocity.
+
+Products: Claude.ai (consumer/prosumer chat), Claude API (developer/enterprise), Claude for Work (team collaboration), and upcoming agentic products under the Claude Computer Use and Projects umbrella.

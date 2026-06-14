@@ -1,0 +1,90 @@
+[
+  {
+    "id": "eval_001",
+    "description": "NVIDIA AI chip market share and datacenter business analysis",
+    "input": "Analyze NVIDIA's AI chip market share, H100/H200 GPU revenue contribution, and primary competitive risks heading into 2025.",
+    "retrieval_context": [
+      "NVIDIA reported record datacenter revenue of $47.5 billion in Q3 FY2025, representing 112% year-over-year growth, driven primarily by Hopper architecture GPU sales including the H100 and H200 to hyperscalers and enterprise customers.",
+      "NVIDIA holds an estimated 70–95% share of the AI training accelerator market as of mid-2024, with AMD's MI300X and Intel's Gaudi 3 representing the primary competitive alternatives capturing roughly 5–15% combined.",
+      "Key risks to NVIDIA's AI dominance include: (1) US export controls restricting sales of advanced GPUs to China, which previously represented ~20% of datacenter revenue; (2) customer in-house silicon programs by Google (TPUs), Amazon (Trainium), Microsoft (Maia), and Meta (MTIA); (3) cyclical demand normalization after hyperscaler GPU build-out peaks.",
+      "NVIDIA's CUDA software ecosystem, representing 15+ years of developer tooling and 4 million registered developers, is widely cited as the primary moat preventing rapid competitive displacement.",
+      "Source: NVIDIA Q3 FY2025 Earnings Call Transcript, November 2024. https://investor.nvidia.com/financial-information/sec-filings/default.aspx"
+    ],
+    "reference_answer": {
+      "company_name": "NVIDIA Corporation",
+      "market_cap_or_valuation": "Approximately $3.3T as of late 2024",
+      "core_revenue_drivers": [
+        "Datacenter GPU sales (H100/H200 Hopper architecture) to hyperscalers — $47.5B in Q3 FY2025",
+        "AI training accelerator market leadership with ~70-95% share",
+        "CUDA software ecosystem lock-in with 4 million registered developers"
+      ],
+      "risk_factors": [
+        "US export controls restricting China sales (previously ~20% of datacenter revenue)",
+        "Customer in-house silicon programs: Google TPU, Amazon Trainium, Microsoft Maia, Meta MTIA",
+        "Cyclical demand normalization post hyperscaler GPU build-out"
+      ],
+      "sources": [
+        "https://investor.nvidia.com/financial-information/sec-filings/default.aspx"
+      ]
+    }
+  },
+  {
+    "id": "eval_002",
+    "description": "OpenAI private valuation and revenue model analysis",
+    "input": "What is OpenAI's current private valuation, primary revenue streams, and key risk factors for investors considering the company?",
+    "retrieval_context": [
+      "OpenAI closed a $6.6 billion funding round in October 2024 at a post-money valuation of $157 billion, led by Thrive Capital with participation from Microsoft, Nvidia, SoftBank, and others.",
+      "OpenAI's annualised revenue run rate reached approximately $3.7 billion in mid-2024, with ChatGPT Plus subscriptions ($20/month) and API access for enterprise and developer customers representing the two dominant revenue streams.",
+      "OpenAI launched ChatGPT Enterprise in August 2023, targeting Fortune 500 companies with dedicated, compliance-grade API deployments. The enterprise tier carries significantly higher average contract values than consumer subscriptions.",
+      "Material risks for OpenAI investors include: intense competition from Google DeepMind (Gemini), Anthropic (Claude), Meta (Llama open-source), and xAI (Grok); a highly capital-intensive compute cost structure estimated at over $7 billion annually; pending transition from non-profit governance to a for-profit public benefit corporation; and key-person dependency on leadership.",
+      "Source: Bloomberg, The Information, Reuters reporting on OpenAI fundraising round, October 2024. https://www.bloomberg.com/news/articles/2024-10-02/openai-closes-6-6-billion-fundraise"
+    ],
+    "reference_answer": {
+      "company_name": "OpenAI",
+      "market_cap_or_valuation": "$157 billion post-money valuation (October 2024 funding round)",
+      "core_revenue_drivers": [
+        "ChatGPT Plus consumer subscriptions at $20/month",
+        "API access revenue from enterprise and developer customers",
+        "ChatGPT Enterprise tier with compliance-grade deployments for Fortune 500 companies"
+      ],
+      "risk_factors": [
+        "Intense competition from Google DeepMind (Gemini), Anthropic (Claude), Meta (Llama), xAI (Grok)",
+        "Capital-intensive compute cost structure estimated at over $7 billion annually",
+        "Governance transition from non-profit to for-profit public benefit corporation",
+        "Key-person dependency on leadership"
+      ],
+      "sources": [
+        "https://www.bloomberg.com/news/articles/2024-10-02/openai-closes-6-6-billion-fundraise"
+      ]
+    }
+  },
+  {
+    "id": "eval_003",
+    "description": "Microsoft Azure AI cloud revenue drivers and competitive positioning",
+    "input": "Break down Microsoft Azure's AI-driven revenue growth, key product lines contributing to cloud performance, and competitive risks from AWS and Google Cloud.",
+    "retrieval_context": [
+      "Microsoft reported Azure and other cloud services revenue grew 33% year-over-year in Q1 FY2025 (ending September 2024), with management attributing approximately 12 percentage points of that growth directly to AI services consumption.",
+      "Microsoft's AI commercial revenue, which includes Azure OpenAI Service, GitHub Copilot, and Microsoft 365 Copilot, surpassed a $10 billion annualised revenue run rate as of Q1 FY2025, making it the fastest product in Microsoft's history to reach that milestone.",
+      "Azure OpenAI Service, which provides enterprise API access to GPT-4 and other OpenAI models, had over 60,000 paying customers as of mid-2024, spanning financial services, healthcare, retail, and government sectors.",
+      "Competitive risks to Azure's AI cloud position include: AWS's investment in Anthropic ($4B committed) and its Bedrock multi-model platform offering customers model diversity; Google Cloud's tight Gemini integration and competitive pricing pressure; and the risk of AI workload portability reducing customer switching costs over time.",
+      "Microsoft's $13 billion cumulative investment in OpenAI provides exclusive access to deploy OpenAI models commercially, a structural advantage that competitors cannot directly replicate. Source: Microsoft Q1 FY2025 Earnings Release, October 2024. https://www.microsoft.com/en-us/investor/earnings/fy-2025-q1/press-release-webcast"
+    ],
+    "reference_answer": {
+      "company_name": "Microsoft Corporation (Azure Cloud)",
+      "market_cap_or_valuation": "Approximately $3.1T market capitalisation as of late 2024",
+      "core_revenue_drivers": [
+        "Azure cloud services revenue growth of 33% YoY in Q1 FY2025 with 12pp attributed to AI",
+        "Azure OpenAI Service with 60,000+ enterprise customers accessing GPT-4 commercially",
+        "AI commercial revenue surpassing $10B annualised run rate (GitHub Copilot, M365 Copilot, Azure OpenAI)"
+      ],
+      "risk_factors": [
+        "AWS Bedrock multi-model platform and $4B Anthropic investment offering model diversity",
+        "Google Cloud Gemini integration and competitive pricing pressure",
+        "AI workload portability risk reducing customer switching costs"
+      ],
+      "sources": [
+        "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q1/press-release-webcast"
+      ]
+    }
+  }
+]

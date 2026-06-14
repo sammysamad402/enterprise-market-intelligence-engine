@@ -1,0 +1,18 @@
+Company: Databricks (Private)
+Structure: C-Corp (IPO anticipated 2025–2026)
+Valuation: $62 billion (December 2024 funding round)
+Total Funding: ~$14 billion
+
+Databricks is the leading enterprise data and AI platform, built on the open-source Apache Spark and Delta Lake foundations. The company's Lakehouse architecture — unifying data warehousing and data lake capabilities — has achieved mainstream enterprise adoption with over 10,000 customers including 60% of the Fortune 500.
+
+Annual recurring revenue reached approximately $2.4 billion in FY2025, growing at 50%+ year-over-year. The combination of Databricks' core data platform (Unity Catalog, Delta Lake, MLflow) with its AI/ML capabilities (Mosaic AI, AutoML, Feature Store) positions it as the data backbone for enterprise AI deployments.
+
+The MosaicML acquisition ($1.3B, 2023) was transformative: it gave Databricks a frontier model training capability and the DBRX open-source LLM (released March 2024, competitive with Mixtral and early Llama 3). DBRX demonstrated that open-weight models trained on Databricks' platform could approach closed-model performance, validating the company's enterprise AI strategy.
+
+Databricks' strategic thesis is that enterprises will fine-tune and customize foundation models on their proprietary data rather than use generic API models — and that this fine-tuning, data management, and governance workflow will run on Databricks. This positions Databricks as the "picks and shovels" infrastructure of the enterprise AI transition.
+
+Unity Catalog (data governance) has become a critical product: as enterprises use LLMs to query internal data, access controls, lineage tracking, and compliance auditing become mandatory. Unity Catalog provides these capabilities across multi-cloud environments.
+
+Key competitors: Snowflake (data warehousing), Microsoft Fabric (Azure-integrated data platform), Google BigQuery, and AWS Glue. The Databricks vs. Snowflake competition is the most watched rivalry in enterprise data — Databricks attacks from the data engineering/ML side, Snowflake from the SQL analytics side.
+
+IPO readiness: Databricks has been consistently profitable on an adjusted EBITDA basis since 2023. The December 2024 funding round at $62B valuation (led by Andreessen Horowitz, DST Global, Insight Partners) suggests an IPO target valuation of $80–100B, making it potentially the largest US tech IPO of 2025–2026.

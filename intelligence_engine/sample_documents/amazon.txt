@@ -1,0 +1,17 @@
+Company: Amazon.com, Inc.
+Ticker: AMZN
+Sector: E-commerce / Cloud Infrastructure / AI / Logistics
+
+Amazon reported fiscal year 2024 revenue of approximately $638 billion. AWS (Amazon Web Services) generated $108 billion in revenue with operating income of $39 billion — making it the highest-margin business in Amazon's portfolio and the primary engine of overall company profitability. AWS holds approximately 31% of global cloud infrastructure market share.
+
+Amazon's AI strategy has three distinct layers: (1) AWS Bedrock as the enterprise API platform for foundation models (hosting Claude, Llama, Mistral, Titan, and others), (2) Amazon Q as the AI assistant embedded in AWS developer tools and enterprise software, and (3) Trainium/Inferentia custom silicon for cost-competitive AI training and inference.
+
+The Anthropic partnership is strategically central: Amazon committed up to $4 billion in investment with Amazon Web Services as Anthropic's primary cloud provider. Claude models are available exclusively on Bedrock within the AWS ecosystem before other clouds, and Anthropic uses AWS Trainium chips for a portion of training workloads. This gives AWS a differentiated model portfolio competing against Azure's OpenAI exclusivity.
+
+AWS Trainium2 delivers approximately 4x the performance of Trainium1 and is already deployed in multi-exaflop clusters for Amazon's own LLM training. Trainium reduces dependency on NVIDIA GPUs for inference workloads, though NVIDIA H100/H200 clusters remain the majority of AWS's GPU fleet.
+
+Amazon's logistics and fulfillment network — now operating same-day delivery in 130+ US metro areas — is increasingly a competitive moat that pure digital competitors cannot replicate. The robotics deployment (Proteus, Sparrow, Cardinal) is reducing fulfillment cost-per-unit while improving throughput.
+
+Key risks: AWS price competition from Azure and Google Cloud compressing margins, FTC regulatory scrutiny of marketplace seller practices, and labor cost inflation in fulfillment operations. The advertising business ($57B in 2024) is growing at 20%+ and increasingly important for overall margin mix.
+
+Prime membership has reached approximately 200 million global subscribers, providing a flywheel for retail, streaming (Prime Video), and services cross-sell.

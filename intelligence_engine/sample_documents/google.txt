@@ -1,0 +1,17 @@
+Company: Alphabet Inc. (Google)
+Ticker: GOOGL
+Sector: Digital Advertising / Cloud / AI
+
+Alphabet reported fiscal year 2024 revenue of $350 billion, with Google Services (Search, YouTube, Play) contributing approximately $300 billion and Google Cloud reaching $43 billion for the year. Cloud is growing at 28% annually and approaching profitability thresholds that could make it a significant earnings contributor.
+
+Google's AI strategy is anchored on its Gemini model family. Gemini Ultra/Pro/Flash variants power Google Search AI Overviews (rolled out to 1 billion+ users), Google Workspace Duet AI, and the Vertex AI platform for enterprise developers. Google DeepMind, formed by the merger of Google Brain and DeepMind, is the internal research organization behind Gemini.
+
+Google Cloud's Vertex AI is competing directly with Azure OpenAI Service and AWS Bedrock for enterprise AI API business. Unique differentiators include TPU v5e/v5p access (proprietary ML accelerators), Gemini's long-context window (1 million tokens in Gemini 1.5 Pro), and native multimodality.
+
+Search remains the most strategically sensitive area: AI Overviews (formerly SGE) directly answers queries that previously required clicking through to publisher websites, creating tension with the publisher ecosystem that Google depends on for training data and advertising revenue. Click-through rates on Search ads have held up better than feared, but the long-term monetization model for AI-augmented search remains unresolved.
+
+YouTube Shorts monetization has reached parity with long-form video on a per-view basis, adding a significant new revenue stream. YouTube TV (cable replacement) has 8+ million subscribers.
+
+Key risks: DOJ antitrust ruling requiring structural remedies to Search distribution agreements (Apple default search deal worth ~$18–20B annually at risk), AI competition from Perplexity and ChatGPT eroding Search market share among younger demographics, and regulatory pressure in the EU under the Digital Markets Act.
+
+Google's TPU infrastructure provides a strategic hedge against NVIDIA dependency: approximately 70% of Google's internal AI training runs on TPUs, reducing but not eliminating NVIDIA procurement exposure.

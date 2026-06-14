@@ -1,0 +1,17 @@
+Company: Palantir Technologies, Inc.
+Ticker: PLTR
+Sector: AI / Data Analytics / Defense & Intelligence
+
+Palantir has undergone a significant commercial re-rating in 2024–2025, driven by the adoption of its Artificial Intelligence Platform (AIP) which launched in May 2023. AIP allows enterprise customers to deploy and orchestrate LLMs (including Claude and GPT-4) on top of Palantir's Ontology — its proprietary semantic data model that connects operational data to business actions.
+
+Fiscal year 2024 revenue reached $2.9 billion, growing 29% year-over-year. US commercial revenue grew 54% in 2024, accelerating to over $700 million annually — evidence that Palantir's AIP strategy is successfully converting government-sector credibility into commercial enterprise deals. The company achieved GAAP profitability for the first time in 2023 and has maintained it since.
+
+Palantir's Ontology is the key technical differentiator: unlike generic data platforms or LLM APIs, the Ontology creates a semantic layer that represents real-world entities (people, equipment, processes, contracts) as structured objects with relationships, enabling LLMs to take grounded, auditable actions rather than generating hallucinated free-text responses. Enterprise customers in manufacturing, energy, healthcare, and financial services use this for operational AI workflows.
+
+Defense and intelligence remain the largest revenue segment (~55% of total). Key US government contracts include the Army's Vantage program, Project Maven (AI-enabled imagery analysis), and multiple intelligence community platforms. International government expansion (UK, France, Japan, Israel) is a growth priority.
+
+AIP Boot Camps — intensive 5-day workshops where Palantir engineers help customer teams build and deploy AIP workflows — have become the primary sales motion, replacing the traditional 12–18 month enterprise sales cycle. Conversion rates from boot camp to contract are reportedly above 80%, and the average boot camp contract value is $1–5 million.
+
+Inclusion in the S&P 500 (September 2023) and subsequent institutional fund buying contributed to significant stock appreciation. The company trades at premium multiples (~40x revenue) reflecting AI growth expectations.
+
+Key risks: CEO Alex Karp's unconventional public persona creates enterprise buyer relationship risk; customer concentration in US government creates budget exposure; and the Ontology's complexity may limit the speed of new customer onboarding relative to simpler API-first competitors.

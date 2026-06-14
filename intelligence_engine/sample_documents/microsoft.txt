@@ -1,0 +1,15 @@
+Company: Microsoft Corporation
+Ticker: MSFT
+Sector: Cloud Computing / Enterprise Software / AI
+
+Microsoft has positioned itself as the enterprise AI platform of record through its exclusive cloud partnership with OpenAI and deep integration of Copilot across the Microsoft 365, Azure, and Dynamics product lines. The company's fiscal year 2025 revenue reached approximately $270 billion, with Azure cloud revenue growing at 30%+ annually.
+
+The Azure OpenAI Service — which provides GPT-4, GPT-4o, o1, and o3 API access to enterprise customers — has become one of the fastest-growing Azure product lines in history. Microsoft reports that Azure AI revenue (including OpenAI API services) is already running at multi-billion dollar annual run rates.
+
+Microsoft Copilot for Microsoft 365 (at $30/user/month) is the company's most significant monetization bet: if even 10% of the existing 400 million commercial Microsoft 365 seats adopt Copilot, the incremental ARR is approximately $14 billion. Enterprise adoption has been slower than initially projected due to IT governance concerns and ROI uncertainty, but deal sizes are increasing.
+
+GitHub Copilot, the AI pair-programming assistant, has passed 2 million paid subscribers and is now generating over $2 billion in ARR. Microsoft is introducing GitHub Copilot Enterprise (context-aware on private codebases) at $39/user/month, targeting the 90 million developers in enterprise environments.
+
+Azure's competitive position versus AWS: Azure has closed the gap significantly in AI/ML workloads, holding approximately 25% of cloud infrastructure market share versus AWS at ~31%. Microsoft's advantage is the enterprise software installed base (Teams, Active Directory, Office) which creates natural upsell paths into Azure.
+
+Key risks: OpenAI relationship dependency, regulatory scrutiny of AI bundling in Office products (EU investigation ongoing), and CapEx commitments of $80+ billion in FY2025 which compress near-term free cash flow.

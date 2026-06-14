@@ -1,0 +1,55 @@
+# Environment
+.env
+.env.*
+
+# Virtual Environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qdrant Storage
+storage/
+
+# Logs
+*.log
+
+# LangGraph
+checkpoints/
+
+# FastEmbed Cache
+fastembed_cache/
+
+# HuggingFace Cache
+.cache/
+hf_cache/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+.deepeval/

@@ -1,0 +1,17 @@
+Company: OpenAI (Private)
+Structure: Capped-profit LLC under nonprofit parent
+Valuation: ~$300 billion (2025 funding round)
+
+OpenAI is the most influential AI laboratory in the commercial AI landscape. Its GPT-4o, o1, o3, and GPT-4.5 models have defined the performance benchmarks that competitors measure against. ChatGPT reached 400 million weekly active users in early 2025, making it one of the fastest consumer product growth stories in technology history.
+
+Revenue reached approximately $5 billion in 2024 and is expected to exceed $11 billion in 2025, driven by ChatGPT Plus/Pro subscriptions ($20–$200/month), the OpenAI API (enterprise and developer tier), and ChatGPT Enterprise (custom deployment with data privacy controls).
+
+The corporate restructuring from capped-profit LLC to a Public Benefit Corporation (PBC) was completed in early 2025, resolving governance tensions that emerged after the November 2023 board crisis. Microsoft retains approximately 49% economic interest in the capped-profit entity under the legacy structure, with new investors (SoftBank, UAE sovereign funds, others) holding equity in the PBC entity.
+
+OpenAI's o3 model (released early 2025) achieved state-of-the-art performance on ARC-AGI benchmarks and represents a qualitative advance in multi-step reasoning through chain-of-thought compute scaling. The o-series models trade inference speed for accuracy, pricing at approximately $15–60 per million tokens versus $5–15 for GPT-4o.
+
+Stargate — the joint venture with SoftBank, Oracle, and the US government — commits $500 billion in AI infrastructure investment over four years, with $100 billion in immediate deployment. OpenAI serves as the primary technology provider; this secures compute supply independent of Microsoft Azure.
+
+Key risks: compute cost per token must continue falling for the business model to work at scale; talent retention is challenging with Google DeepMind, Anthropic, and Meta AI offering competitive packages; regulatory risk in EU (AI Act compliance for high-risk systems); and dependency on NVIDIA supply chain.
+
+The Operator and Agent products (allowing GPT models to take autonomous actions on behalf of users) represent the next major product surface — enterprise pricing for agentic workflows is expected to be materially higher than pure API token pricing.
