@@ -556,6 +556,18 @@ enterprise-market-intelligence-engine/
 
 ---
 
+## 📈 Project Statistics
+
+- Multi-Agent Nodes: 3
+- Vector Database: Qdrant
+- Evaluation Cases: 9
+- Technologies Used: 12+
+- Async Retrieval: Yes
+- Structured Output Validation: Yes
+- Independent Critic Agent: Yes
+
+---
+
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:24243e,50:302b63,100:0f0c29&height=120&section=footer&text=Built+with+LangGraph+%C2%B7+OpenAI+%C2%B7+Qdrant+%C2%B7+DeepEval&fontSize=14&fontColor=a78bfa&fontAlignY=65" width="100%"/>
 </p>
