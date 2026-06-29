@@ -282,7 +282,7 @@ graph TD
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="assets/deepeval_results.png" width="100%" alt="DeepEval Results"/>
+      <img src="assets/test_cases.png" width="100%" alt="DeepEval Results"/>
       <br/>
       <sub><b>📊 DeepEval Suite</b> — 9/9 tests passing across Faithfulness, Relevancy & Schema Validity</sub>
     </td>
